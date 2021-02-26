@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Tweets</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <h3>Tweets</h3>
+    <hr>
+    <a th:href="@{/tweets/showFormForAdd}" class="btn btn-primary btn-sm mb-3">
+        Post new Tweet</a>
+    <a th:href="@{/tweets/topHashtags}" class="btn btn-primary btn-sm mb-3">View Top Hashtags</a>
+    <a href="/home" class="btn btn-primary btn-sm mb-3">Back</a>
+    <br>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>User</th>
+            <th>Tweet</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each = "tempTweet : ${tweets}">
+            <td th:text="${tempTweet.Name}" />
+            <td th:text="${tempTweet.Description}" />
+            <td>
+                <a th:href="@{/tweets/delete(tweetId=${tempTweet.id})}"
+                   class="btn btn-danger btn-sm"
+                   onclick="if((!confirm('Remove this tweet from your feed?'))) return false">
+                    Not Intrested
+                </a>
+
+            </td>
+        </tr>
+        </tbody>
+
+    </table>
+</div>
+</body>
+</html>

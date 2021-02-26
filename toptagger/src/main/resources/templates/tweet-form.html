@@ -1,0 +1,30 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Save Tweet</title>
+    <meta charset="utf-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>
+<form action="#" th:action="@{/tweets/save}"
+      th:object="${tweet}" method="POST">
+
+    <input type="hidden" th:field="*{id}" />
+    <br>
+    <br> 
+    What's happening?:
+    <span th:classappend="${#fields.hasErrors('description')} ? 'input-icon right' : ''">
+        <i th:if="${#fields.hasErrors('description')}" class="fa fa-exclamation tooltips" data-original-title="please enter the description" data-container="body"></i>
+        <input type="text" class="form-control mb-4 col-4" minlength="10" th:field="*{description}" th:required="required" placeholder="Enter at least 10 characters"/>
+        <span style="color:red" th:if="${#fields.hasErrors('description')}" class="help-block" th:errors="*{description}"></span>
+    </span>
+    <br>
+     <button type="submit" class="btn btn-info col-1">Tweet it</button>
+</form>
+<hr>
+<a th:href="@{/tweets/list}">Back to feed</a>
+</body>
